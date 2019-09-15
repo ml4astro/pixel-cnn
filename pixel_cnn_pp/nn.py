@@ -7,7 +7,7 @@ import tensorflow as tf
 from tensorflow.contrib.framework.python.ops import add_arg_scope
 
 def int_shape(x):
-    return [x.get_shape()[0]]  + list(map(int, x.get_shape()[1:]))
+    return [tf.shape(x_)[0]] + list(map(int, x.get_shape()[1:]))
 
 def concat_elu(x):
     """ like concatenated ReLU (http://arxiv.org/abs/1603.05201), but then with ELU """
@@ -263,7 +263,7 @@ def deconv2d(x_, num_filters, filter_size=[3,3], stride=[1,1], pad='SAME', nonli
 def nin(x, num_units, **kwargs):
     """ a network in network layer (1x1 CONV) """
     s = int_shape(x)
-    x = tf.reshape(x, [np.prod(s[:-1]),s[-1]])
+    x = tf.reshape(x, [-1, s[-1]])
     x = dense(x, num_units, **kwargs)
     return tf.reshape(x, s[:-1]+[num_units])
 
