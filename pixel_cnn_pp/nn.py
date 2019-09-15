@@ -7,7 +7,7 @@ import tensorflow as tf
 from tensorflow.contrib.framework.python.ops import add_arg_scope
 
 def int_shape(x):
-    return list(map(int, x.get_shape()))
+    return [x.get_shape()[0]]  + list(map(int, x.get_shape()[1:]))
 
 def concat_elu(x):
     """ like concatenated ReLU (http://arxiv.org/abs/1603.05201), but then with ELU """
