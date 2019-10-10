@@ -20,7 +20,7 @@ setup(
         'six',
         'imageio',
         'numpy',
-        'tensorflow',
+        'tensorflow<2.0.0',
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
